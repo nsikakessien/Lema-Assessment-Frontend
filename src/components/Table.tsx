@@ -132,13 +132,16 @@ export function Table<T extends object>({
               <FaArrowLeft size={16} color="#717680" /> Previous
             </span>
           }
-          onPageChange={({ selected }) => onPageChange(selected)}
+          onPageChange={({ selected }) => {
+            onPageChange(selected);
+          }}
           pageRangeDisplayed={3}
           marginPagesDisplayed={2}
           pageCount={pageCount}
           forcePage={pageIndex}
           containerClassName="flex items-center gap-2"
-          pageClassName="w-[40px] h-[40px] flex justify-center items-center rounded-lg cursor-pointer text-[#717680] hover:bg-gray-100"
+          pageClassName="cursor-pointer"
+          pageLinkClassName="w-[40px] h-[40px] flex justify-center items-center rounded-lg cursor-pointer text-[#717680] hover:bg-gray-100"
           activeClassName="bg-[#F9F5FF] text-[#7F56D9] font-medium"
           previousClassName="px-3 py-1 cursor-pointer text-gray-600 hover:text-black"
           nextClassName="px-3 py-1 cursor-pointer text-gray-600 hover:text-black"
