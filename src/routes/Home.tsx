@@ -29,12 +29,20 @@ const columns: ColumnDef<User>[] = [
 function Home() {
   const [page, setPage] = useState(0);
 
-  const { data: users, isLoading: usersLoading } = useUsers({
+  const {
+    data: users,
+    isLoading: usersLoading,
+    isFetching: fetchingUsers,
+  } = useUsers({
     pageNumber: page,
     pageSize: 4,
   });
 
-  const { data: totalCount, isLoading: usersCountLoading } = useUsersCount();
+  const {
+    data: totalCount,
+    isLoading: usersCountLoading,
+    isFetching: fetchingCount,
+  } = useUsersCount();
 
   return (
     <main className="flex flex-col justify-center md:py-[50px] md:p-0 p-6">
@@ -43,7 +51,9 @@ function Home() {
         <Table
           data={(users as User[]) || []}
           columns={columns}
-          isLoading={usersLoading || usersCountLoading}
+          isLoading={
+            usersLoading || usersCountLoading || fetchingCount || fetchingUsers
+          }
           pageCount={
             totalCount ? Math.max(1, Math.ceil(totalCount.count / 4)) : 1
           }
